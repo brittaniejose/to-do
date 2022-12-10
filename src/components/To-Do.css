@@ -1,0 +1,14 @@
+.formItems {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.formItems :first-child {
+    width: 70%;
+    margin-right: 10px;
+}
+
+#searchbtn {
+    margin-right: 5px;
+}

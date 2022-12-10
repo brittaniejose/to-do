@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react";
+import AppBar from './components/AppBar';
+import ToDo from './components/To-Do';
+import Tasks from './components/Tasks'
+
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  
+
+  const saveTasks = (newTask) => {
+    setTasks([newTask, ...tasks]);
+    console.log(tasks)
+  }
+
+  const deleteTask = (id) => {
+    let filteredTaskArr = tasks.filter(taskObj => {
+      return id !== taskObj.id
+    })
+    setTasks(filteredTaskArr);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <AppBar />
+      <ToDo saveTasksProp={task=> saveTasks(task)}/>
+      <Tasks tasks={tasks} setTasks={setTasks} removeTask={(id) => deleteTask(id)}/>
+      
     </div>
   );
 }
